@@ -1,0 +1,42 @@
+.acct-overview {
+    padding: .6rem;
+    margin-bottom: 1rem;
+    background-color: var(--white);
+    box-shadow: var(--bs);
+    border-radius: var(--br);
+}
+.acct-overview-row1 {
+    padding: 1rem 0;
+}
+.acct-overview-row1 p{
+    color: var(--gray4);
+}
+.acct-overview-row1 span {
+    font-size: 1.5rem;
+}
+.acct-overview-row2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    background-color: var(--color);
+    border-radius: var(--br);
+}
+.divider {
+    width: 1.3px;
+    height: 40px;
+    background-color: var(--white);
+}
+.acct-overview-row2-col p {
+    color: var(--white);
+}
+.acct-overview-row2-col span {
+    color: var(--white);
+    font-size: 1.2rem;
+}
+.expenses-level {
+    padding: .6rem;
+    background-color: var(--white);
+    box-shadow: var(--bs);
+    border-radius: var(--br);
+}
