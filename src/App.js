@@ -4,11 +4,13 @@ import Budgets from './pages/Budgets';
 import History from './pages/History';
 import Expenses from './pages/Expenses';
 import './App.css';
+import Navigation from './components/Navigation';
 
 function App() {
   return (
     <main>
       <BrowserRouter>
+        {/* <Navigation /> */}
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/budgets' element={<Budgets />} />

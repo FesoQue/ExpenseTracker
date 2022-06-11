@@ -20,7 +20,7 @@
     --gray6: #454e56;
     --gray7: #2a2e35;
     --gray8: #12181b;
-
+    --transition: .3s ease-in-out;
     --br: .3rem; 
     --bs: 0 1px 2px 0 rgb(60 64 67 / 3%), 0 1px 3px 1px rgb(60 64 67 / 3%);
 }
@@ -40,6 +40,7 @@ p{
     font-weight: 400;
 }
 h1, h2, h3, h4, h5 {
+    line-height: 1;
     font-weight: 600;
 }
 ul {
@@ -51,14 +52,34 @@ li {
 a {
     text-decoration: none;
 }
-.container {
+main {
+    position: relative;
     width: 95%;
     max-width: 1440px;
     margin: 0 auto;
 }
-
-
-
+nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    width: 95%;
+    margin: 0 auto;
+    bottom: 30px;
+    height: 3rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--white);
+    border-radius: var(--br);
+    box-shadow: var(--bs);
+}
+nav svg {
+    width: 1.5rem;
+    color: var(--gray2);
+}
+.active svg {
+    color: var(--color);
+}
 
 
 
