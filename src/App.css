@@ -21,7 +21,7 @@
     --gray7: #2a2e35;
     --gray8: #12181b;
 
-    --br: .5rem; 
+    --br: .3rem; 
     --bs: 0 1px 2px 0 rgb(60 64 67 / 3%), 0 1px 3px 1px rgb(60 64 67 / 3%);
 }
 html,
@@ -33,9 +33,14 @@ body {
     line-height: 1.5;
     background-color: var(--color3);
     -webkit-font-smoothing: antialiased;
+    font-family: 'Poppins', sans-serif;
 }
 p{
     font-size: .8rem;
+    font-weight: 400;
+}
+h1, h2, h3, h4, h5 {
+    font-weight: 600;
 }
 ul {
     padding: 0;

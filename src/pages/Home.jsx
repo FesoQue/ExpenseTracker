@@ -1,4 +1,5 @@
 import React from 'react';
+import PieChart from '../components/Charts/PieChart';
 import './Home.css';
 
 const Home = () => {
@@ -29,12 +30,22 @@ const Home = () => {
       {/* progress bar */}
       <div className='expenses-level'>
         <p>Expenses so far</p>
-        <div>
+        <div className='expenses-diff'>
           <span>$280.00</span>
           <span>$1,290</span>
         </div>
         <div className='progress'>
           <div className='bar'></div>
+        </div>
+      </div>
+      {/* expenses category */}
+      <div className='expenses-overview'>
+        <div className='expenses-overview-header'>
+          <p>Recent</p>
+          <p>View all</p>
+        </div>
+        <div className='expenses-chart'>
+          <PieChart />
         </div>
       </div>
     </div>
