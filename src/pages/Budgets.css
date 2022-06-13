@@ -30,10 +30,7 @@
     box-shadow: var(--bs);
     background-color: var(--color3);
     border-radius: var(--br);
-    border: 2px solid transparent;
-}
-.active-category {
-    border: 2px solid var(--color);
+    transition: var(--transition);
 }
 .icon-wrap {
     width: 2rem;
@@ -55,6 +52,7 @@
     position: absolute;
     top: 0;
     right: 0;
+    transition: var(--transition);
 }
 .check svg {
     width: .8rem;
@@ -64,7 +62,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 1rem 0 5rem;
+    margin: 1rem 0 3rem;
 }
 label {
     font-size: .9rem;
@@ -94,4 +92,62 @@ input {
     letter-spacing: .05rem;
     border: 0;
     outline: 0;
+    transition: var(--transition);
+}
+.add-budget-btn:disabled {
+    background-color: var(--gray3);
+}
+.budget-list {
+margin-bottom: 5.5rem;
+}
+.budget-list h4 {
+    font-size: 1rem;
+    color: var(--gray4);
+    margin-bottom: 1rem;
+}
+.budget {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--white);
+    margin-bottom: .8rem;
+    padding: .8rem .5rem;
+    box-shadow: var(--bs);
+    border-radius: var(--br);
+    border-left: 3px solid var(--color);
+}
+.budget-cart {
+    display: flex;
+    align-items: center;
+}
+.budget-cart span {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: grid;
+    place-items: center;
+    margin-right: .5rem;
+    background-color: var(--color2);
+    border-radius: 50%;
+}
+.budget-cart p {
+    color: var(--gray4);
+    font-size: .75rem;
+}
+.budget svg {
+    width: 1rem;
+    fill: var(--color);
+}
+.budget-actions {
+    display: flex;
+    align-items: center;
+}
+.thrash svg {
+    width: .8rem;
+    fill: red;
+}
+.edit svg {
+    width: 1rem;
+    margin-right: .5rem;
+    fill: none;
+    color: var(--gray3);
 }
