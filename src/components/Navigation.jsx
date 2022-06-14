@@ -14,11 +14,11 @@ const Navigation = () => {
       <NavLink to={'/budgets'}>
         <Budget />
       </NavLink>
-      <NavLink to={'/history'}>
-        <History />
-      </NavLink>
       <NavLink to={'/new-expenses'}>
         <New />
+      </NavLink>
+      <NavLink to={'/history'}>
+        <History />
       </NavLink>
     </nav>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Budgets.css';
 import { categories } from '../category';
 import {
@@ -13,6 +13,7 @@ import {
   Travel,
   Delete,
   Edit,
+  Close,
 } from '../components/icons/Icons';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -20,6 +21,10 @@ import {
   setBudget,
   setList,
   removeBudget,
+  handleTotal,
+  handleEditItem,
+  setIsEditing,
+  setEditId,
 } from '../states/states-slice';
 import { Food, Academics } from '../components/icons/Icons';
 
@@ -28,10 +33,11 @@ let disabled = false;
 const Budgets = () => {
   const dispatch = useDispatch();
 
-  const { currentCategory, budget, list } = useSelector(
+  const { currentCategory, budget, list, isEditing, editID } = useSelector(
     (state) => state.appStates
   );
 
+  // remove duplicate budgets from budget list
   var resArr = [];
   list.filter((item) => {
     var i = resArr.findIndex((x) => x.name === item.name);
@@ -42,7 +48,35 @@ const Budgets = () => {
   });
 
   const handleCreateBudget = () => {
-    dispatch(setList({ name: currentCategory, amount: budget }));
+    if (isEditing) {
+      const updatedList = list.map((item) => {
+        if (item.id === editID) {
+          return { ...item, name: currentCategory, amount: budget };
+        }
+        return item;
+      });
+      dispatch(setList(updatedList));
+      dispatch(setActiveCategory(''));
+      dispatch(setBudget(''));
+    } else {
+      dispatch(
+        setList([
+          ...list,
+          {
+            id: new Date().getTime().toString(),
+            name: currentCategory,
+            amount: budget,
+          },
+        ])
+      );
+      dispatch(setActiveCategory(''));
+      dispatch(setBudget(''));
+      dispatch(setIsEditing(false));
+      dispatch(setEditId(null));
+    }
+  };
+
+  const handleCancelBudget = () => {
     dispatch(setActiveCategory(''));
     dispatch(setBudget(''));
   };
@@ -74,6 +108,12 @@ const Budgets = () => {
   } else {
     disabled = false;
   }
+
+  useEffect(() => {
+    dispatch(handleTotal());
+  }, [list]);
+
+  console.log(list, resArr);
 
   return (
     <div className='budget-section'>
@@ -118,25 +158,32 @@ const Budgets = () => {
       {/* enter amount */}
       <div className='budget-amt'>
         <form autoComplete='off'>
+          <label htmlFor='budget'>Enter Amount</label>
           <div className='form-group'>
-            <label htmlFor='budget'>Enter Amount</label>
+            <span>$</span>
             <input
               type='number'
-              placeholder='$'
+              placeholder='enter amount'
               name='budget-amount'
               id='budget'
               value={budget}
-              onChange={(e) => dispatch(setBudget(e.target.value))}
+              onChange={(e) => dispatch(setBudget(Number(e.target.value)))}
             />
           </div>
         </form>
-        <button
-          className='add-budget-btn'
-          onClick={handleCreateBudget}
-          disabled={disabled}
-        >
-          CREATE
-        </button>
+        <div className='button-container'>
+          <button type='button' className='cancel' onClick={handleCancelBudget}>
+            <Close />
+          </button>
+          <button
+            type='button'
+            className='add-budget-btn'
+            onClick={handleCreateBudget}
+            disabled={disabled}
+          >
+            CREATE
+          </button>
+        </div>
       </div>
       <div className='budget-list'>
         <h4>({resArr.length}) Budgets</h4>
@@ -151,15 +198,18 @@ const Budgets = () => {
               </div>
               <p className='price'>${item.amount}</p>
               <div className='budget-actions'>
-                <span className='edit'>
+                <button
+                  className='edit'
+                  onClick={() => dispatch(handleEditItem(item.id))}
+                >
                   <Edit />
-                </span>
-                <span
+                </button>
+                <button
                   className='thrash'
                   onClick={() => dispatch(removeBudget(item.id))}
                 >
                   <Delete />
-                </span>
+                </button>
               </div>
             </div>
           );

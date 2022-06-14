@@ -72,6 +72,7 @@ nav {
     background-color: var(--white);
     border-radius: var(--br);
     box-shadow: var(--bs);
+    z-index: 99;
 }
 nav svg {
     width: 1.5rem;
