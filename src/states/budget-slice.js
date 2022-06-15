@@ -1,17 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { act } from '@testing-library/react';
 
 const initialState = {
   currentCategory: '',
   budget: '',
   list: [],
-  arr: [],
   totalAmount: 0,
   editID: null,
   isEditing: false,
 };
 
-export const statesSlice = createSlice({
+export const budgetSlice = createSlice({
   name: 'states',
   initialState,
   reducers: {
@@ -63,4 +61,4 @@ export const {
   handleEditItem,
   setIsEditing,
   setEditId,
-} = statesSlice.actions;
+} = budgetSlice.actions;

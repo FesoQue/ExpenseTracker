@@ -25,7 +25,7 @@ import {
   handleEditItem,
   setIsEditing,
   setEditId,
-} from '../states/states-slice';
+} from '../states/budget-slice';
 import { Food, Academics } from '../components/icons/Icons';
 
 let disabled = false;
@@ -34,7 +34,7 @@ const Budgets = () => {
   const dispatch = useDispatch();
 
   const { currentCategory, budget, list, isEditing, editID } = useSelector(
-    (state) => state.appStates
+    (state) => state.budgetSlice
   );
 
   // remove duplicate budgets from budget list
@@ -58,6 +58,8 @@ const Budgets = () => {
       dispatch(setList(updatedList));
       dispatch(setActiveCategory(''));
       dispatch(setBudget(''));
+      dispatch(setIsEditing(false));
+      dispatch(setEditId(null));
     } else {
       dispatch(
         setList([
@@ -71,8 +73,6 @@ const Budgets = () => {
       );
       dispatch(setActiveCategory(''));
       dispatch(setBudget(''));
-      dispatch(setIsEditing(false));
-      dispatch(setEditId(null));
     }
   };
 
@@ -113,107 +113,111 @@ const Budgets = () => {
     dispatch(handleTotal());
   }, [list]);
 
-  console.log(list, resArr);
-
   return (
     <div className='budget-section'>
-      <div className='heading'>
-        <h1>Create Your Budget</h1>
-      </div>
-      <div className='categories'>
-        <div className='categories-heading'>
-          <h2>Choose Category</h2>
+      <div className='container'>
+        <div className='heading'>
+          <h1>Create Your Budget</h1>
         </div>
-        <ul className='categories-list'>
-          {categories.map((category) => {
-            return (
-              <li
-                key={category.id}
-                className='category-item active-category'
-                onClick={() => {
-                  dispatch(setActiveCategory(category.category));
-                }}
-                style={{
-                  border:
-                    currentCategory === category.category
-                      ? '2px solid #ff7461'
-                      : '2px solid transparent',
-                }}
-              >
-                <div className='icon-wrap'>{category.icon}</div>
-                <p>{category.category}</p>
-                <span
-                  className='check'
+        <div className='categories'>
+          <div className='categories-heading'>
+            <h2>Choose Category</h2>
+          </div>
+          <ul className='categories-list'>
+            {categories.map((category) => {
+              return (
+                <li
+                  key={category.id}
+                  className='category-item active-category'
+                  onClick={() => {
+                    dispatch(setActiveCategory(category.category));
+                  }}
                   style={{
-                    opacity: currentCategory === category.category ? 1 : 0,
+                    border:
+                      currentCategory === category.category
+                        ? '2px solid #ff7461'
+                        : '2px solid transparent',
                   }}
                 >
-                  <Check />
-                </span>
-              </li>
+                  <div className='icon-wrap'>{category.icon}</div>
+                  <p>{category.category}</p>
+                  <span
+                    className='check'
+                    style={{
+                      opacity: currentCategory === category.category ? 1 : 0,
+                    }}
+                  >
+                    <Check />
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        {/* enter amount */}
+        <div className='budget-amt'>
+          <form autoComplete='off'>
+            <label htmlFor='budget'>Enter Amount</label>
+            <div className='form-group'>
+              <span>$</span>
+              <input
+                type='number'
+                placeholder='enter budget'
+                name='budget-amount'
+                id='budget'
+                value={budget}
+                onChange={(e) => dispatch(setBudget(Number(e.target.value)))}
+              />
+            </div>
+          </form>
+          <div className='button-container'>
+            <button
+              type='button'
+              className='cancel'
+              onClick={handleCancelBudget}
+            >
+              <Close />
+            </button>
+            <button
+              type='button'
+              className='add-budget-btn'
+              onClick={handleCreateBudget}
+              disabled={disabled}
+            >
+              CREATE
+            </button>
+          </div>
+        </div>
+        <div className='budget-list'>
+          <h4>({resArr.length}) Budgets</h4>
+          {resArr.map((item) => {
+            return (
+              <div key={item.id} className='budget'>
+                <div className='budget-cart'>
+                  <span>
+                    <CategoryIcon name={item.name} />
+                  </span>
+                  <p>{item.name}</p>
+                </div>
+                <p className='price'>${item.amount}</p>
+                <div className='budget-actions'>
+                  <button
+                    className='edit'
+                    onClick={() => dispatch(handleEditItem(item.id))}
+                  >
+                    <Edit />
+                  </button>
+                  <button
+                    className='thrash'
+                    onClick={() => dispatch(removeBudget(item.id))}
+                  >
+                    <Delete />
+                  </button>
+                </div>
+              </div>
             );
           })}
-        </ul>
-      </div>
-      {/* enter amount */}
-      <div className='budget-amt'>
-        <form autoComplete='off'>
-          <label htmlFor='budget'>Enter Amount</label>
-          <div className='form-group'>
-            <span>$</span>
-            <input
-              type='number'
-              placeholder='enter amount'
-              name='budget-amount'
-              id='budget'
-              value={budget}
-              onChange={(e) => dispatch(setBudget(Number(e.target.value)))}
-            />
-          </div>
-        </form>
-        <div className='button-container'>
-          <button type='button' className='cancel' onClick={handleCancelBudget}>
-            <Close />
-          </button>
-          <button
-            type='button'
-            className='add-budget-btn'
-            onClick={handleCreateBudget}
-            disabled={disabled}
-          >
-            CREATE
-          </button>
         </div>
-      </div>
-      <div className='budget-list'>
-        <h4>({resArr.length}) Budgets</h4>
-        {resArr.map((item) => {
-          return (
-            <div key={item.id} className='budget'>
-              <div className='budget-cart'>
-                <span>
-                  <CategoryIcon name={item.name} />
-                </span>
-                <p>{item.name}</p>
-              </div>
-              <p className='price'>${item.amount}</p>
-              <div className='budget-actions'>
-                <button
-                  className='edit'
-                  onClick={() => dispatch(handleEditItem(item.id))}
-                >
-                  <Edit />
-                </button>
-                <button
-                  className='thrash'
-                  onClick={() => dispatch(removeBudget(item.id))}
-                >
-                  <Delete />
-                </button>
-              </div>
-            </div>
-          );
-        })}
       </div>
     </div>
   );

@@ -4,7 +4,8 @@ import './Home.css';
 import { useSelector, useDispatch } from 'react-redux';
 
 const Home = () => {
-  const { totalAmount } = useSelector((state) => state.appStates);
+  const { totalAmount } = useSelector((state) => state.budgetSlice);
+  const { totalExpense } = useSelector((state) => state.expenseSlice);
 
   return (
     <div className='container'>
@@ -25,7 +26,7 @@ const Home = () => {
             <div className='divider'></div>
             <div className='acct-overview-row2-col'>
               <p>Spent</p>
-              <span>$1,290</span>
+              <span>${totalExpense}</span>
             </div>
           </div>
         </div>

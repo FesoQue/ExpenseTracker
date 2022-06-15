@@ -52,7 +52,7 @@ li {
 a {
     text-decoration: none;
 }
-main {
+.container {
     position: relative;
     width: 95%;
     max-width: 1440px;
