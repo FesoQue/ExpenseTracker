@@ -7,7 +7,7 @@ import { New } from './icons/Icons';
 
 const Navigation = () => {
   return (
-    <nav>
+    <nav className='mobile-nav'>
       <NavLink to={'/'}>
         <Home />
       </NavLink>

@@ -1,43 +1,46 @@
 .expense-section {
-    min-height: 100% ;
-    background-color: #7788f479
+  min-height: 100%;
+  background-color: #7788f479;
 }
 .expenses-item {
-    background-color: #7788f467;
+  background-color: #7788f467;
 }
 .expenses-icon-wrap {
-    background-color: #7788f4;
+  background-color: #7788f4;
 }
 
 .expenses-item svg {
-    fill: var(--white);
+  fill: var(--white);
 }
 .expenses-item .check svg {
-    fill: transparent;
+  fill: transparent;
 }
 .expenses-form-group {
-    background-color: #7788f44d;
-    border-bottom: 3px solid #7788f4;
+  background-color: #7788f44d;
+  border-bottom: 3px solid #7788f4;
 }
 .add-expenses-btn {
-    background-color: #7788f4;
+  background-color: #7788f4;
 }
 .cancel-expenses {
-    background-color: var(--color);
+  background-color: var(--color);
 }
-.expense-list {
-    margin-bottom: 0;
-    padding-bottom: 5.5rem;
+.expense-list-wrapper {
+  margin-bottom: 0;
+  padding-bottom: 5.5rem;
+}
+.expense-list-wrapper h4 {
+  color: var(--gray6);
 }
 .expense {
-    border-left: 3px solid #7788f4;
+  border-left: 3px solid #7788f4;
 }
 .expense-cart span {
-    background-color: #7788f44d;
+  background-color: #7788f44d;
 }
 .expense-cart span svg {
-    fill: #7788f4;
+  fill: #7788f4;
 }
 .expense-amt {
-    color: red;
+  color: red;
 }

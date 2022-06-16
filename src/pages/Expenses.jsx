@@ -21,11 +21,11 @@ import {
   setExpenseCategory,
   setExpense,
   removeExpense,
-  setIsEditing,
-  setEditId,
+  setIsEditingExpense,
+  setExpenseEditId,
   setExpenseList,
-  handleEditItem,
-  handleTotal,
+  handleEditExpenseItem,
+  handleExpenseTotal,
 } from '../states/expense-slice';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -63,8 +63,8 @@ const Expenses = () => {
       dispatch(setExpenseList(updatedList));
       dispatch(setExpenseCategory(''));
       dispatch(setExpense(''));
-      dispatch(setIsEditing(false));
-      dispatch(setEditId(null));
+      dispatch(setIsEditingExpense(false));
+      dispatch(setExpenseEditId(null));
     } else {
       dispatch(
         setExpenseList([
@@ -115,7 +115,7 @@ const Expenses = () => {
   };
 
   useEffect(() => {
-    dispatch(handleTotal());
+    dispatch(handleExpenseTotal());
   }, [expenseList]);
   // console.log(list);
 
@@ -141,8 +141,8 @@ const Expenses = () => {
                   style={{
                     border:
                       expenseCategory === category.category
-                        ? '2px solid #6578f7'
-                        : '2px solid transparent',
+                        ? '3px solid #6578f7'
+                        : '3px solid transparent',
                   }}
                 >
                   <div className='icon-wrap expenses-icon-wrap'>
@@ -196,35 +196,37 @@ const Expenses = () => {
             </button>
           </div>
         </div>
-        <div className='expense-list budget-list'>
+        <div className='expense-list-wrapper budget-list-wrapper'>
           <h4>({resArr.length}) Expenses</h4>
-          {resArr.map((item) => {
-            return (
-              <div key={item.id} className='expense budget'>
-                <div className='expense-cart budget-cart'>
-                  <span>
-                    <CategoryIcon name={item.name} />
-                  </span>
-                  <p>{item.name}</p>
+          <div className='expense-list budget-list'>
+            {resArr.map((item) => {
+              return (
+                <div key={item.id} className='expense budget'>
+                  <div className='expense-cart budget-cart'>
+                    <span>
+                      <CategoryIcon name={item.name} />
+                    </span>
+                    <p>{item.name}</p>
+                  </div>
+                  <p className='expense-amt price'>-${item.amount}</p>
+                  <div className='budget-actions'>
+                    <button
+                      className='edit'
+                      onClick={() => dispatch(handleEditExpenseItem(item.id))}
+                    >
+                      <Edit />
+                    </button>
+                    <button
+                      className='thrash'
+                      onClick={() => dispatch(removeExpense(item.id))}
+                    >
+                      <Delete />
+                    </button>
+                  </div>
                 </div>
-                <p className='expense-amt price'>-${item.amount}</p>
-                <div className='budget-actions'>
-                  <button
-                    className='edit'
-                    onClick={() => dispatch(handleEditItem(item.id))}
-                  >
-                    <Edit />
-                  </button>
-                  <button
-                    className='thrash'
-                    onClick={() => dispatch(removeExpense(item.id))}
-                  >
-                    <Delete />
-                  </button>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

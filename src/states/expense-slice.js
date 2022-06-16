@@ -30,14 +30,14 @@ export const expensesSlice = createSlice({
       );
       return { ...state, expenseList: expenseItem };
     },
-    handleTotal: (state) => {
+    handleExpenseTotal: (state) => {
       let total = 0;
       state.expenseList.forEach((item) => {
         total += item.amount;
       });
       return { ...state, totalExpense: total.toFixed(2) };
     },
-    handleEditItem: (state, action) => {
+    handleEditExpenseItem: (state, action) => {
       const id = action.payload;
       const specificExpense = state.expenseList.find(
         (expense) => expense.id === id
@@ -47,10 +47,10 @@ export const expensesSlice = createSlice({
       state.expenseCategory = specificExpense.name;
       state.isEditingExpense = true;
     },
-    setIsEditing: (state, action) => {
+    setIsEditingExpense: (state, action) => {
       return { ...state, isEditingExpense: action.payload };
     },
-    setEditId: (state, action) => {
+    setExpenseEditId: (state, action) => {
       return { ...state, expenseEditID: action.payload };
     },
   },
@@ -61,8 +61,8 @@ export const {
   setExpense,
   setExpenseList,
   removeExpense,
-  handleTotal,
-  handleEditItem,
-  setIsEditing,
-  setEditId,
+  handleExpenseTotal,
+  handleEditExpenseItem,
+  setIsEditingExpense,
+  setExpenseEditId,
 } = expensesSlice.actions;

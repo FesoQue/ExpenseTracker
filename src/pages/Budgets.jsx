@@ -135,8 +135,8 @@ const Budgets = () => {
                   style={{
                     border:
                       currentCategory === category.category
-                        ? '2px solid #ff7461'
-                        : '2px solid transparent',
+                        ? '3px solid #ff7461'
+                        : '3px solid transparent',
                   }}
                 >
                   <div className='icon-wrap'>{category.icon}</div>
@@ -188,35 +188,37 @@ const Budgets = () => {
             </button>
           </div>
         </div>
-        <div className='budget-list'>
+        <div className='budget-list-wrapper'>
           <h4>({resArr.length}) Budgets</h4>
-          {resArr.map((item) => {
-            return (
-              <div key={item.id} className='budget'>
-                <div className='budget-cart'>
-                  <span>
-                    <CategoryIcon name={item.name} />
-                  </span>
-                  <p>{item.name}</p>
+          <div className='budget-list'>
+            {resArr.map((item) => {
+              return (
+                <div key={item.id} className='budget'>
+                  <div className='budget-cart'>
+                    <span>
+                      <CategoryIcon name={item.name} />
+                    </span>
+                    <p>{item.name}</p>
+                  </div>
+                  <p className='price'>${item.amount}</p>
+                  <div className='budget-actions'>
+                    <button
+                      className='edit'
+                      onClick={() => dispatch(handleEditItem(item.id))}
+                    >
+                      <Edit />
+                    </button>
+                    <button
+                      className='thrash'
+                      onClick={() => dispatch(removeBudget(item.id))}
+                    >
+                      <Delete />
+                    </button>
+                  </div>
                 </div>
-                <p className='price'>${item.amount}</p>
-                <div className='budget-actions'>
-                  <button
-                    className='edit'
-                    onClick={() => dispatch(handleEditItem(item.id))}
-                  >
-                    <Edit />
-                  </button>
-                  <button
-                    className='thrash'
-                    onClick={() => dispatch(removeBudget(item.id))}
-                  >
-                    <Delete />
-                  </button>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
