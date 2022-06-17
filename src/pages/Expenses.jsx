@@ -26,6 +26,7 @@ import {
   setExpenseList,
   handleEditExpenseItem,
   handleExpenseTotal,
+  clearExpensesList,
 } from '../states/expense-slice';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -197,7 +198,14 @@ const Expenses = () => {
           </div>
         </div>
         <div className='expense-list-wrapper budget-list-wrapper'>
-          <h4>({resArr.length}) Expenses</h4>
+          <div className='budget-list-header'>
+            <h4>({resArr.length}) Budgets</h4>
+            {resArr.length > 0 && (
+              <button onClick={() => dispatch(clearExpensesList())}>
+                Clear All
+              </button>
+            )}
+          </div>
           <div className='expense-list budget-list'>
             {resArr.map((item) => {
               return (
@@ -208,7 +216,7 @@ const Expenses = () => {
                     </span>
                     <p>{item.name}</p>
                   </div>
-                  <p className='expense-amt price'>-${item.amount}</p>
+                  <p className='expense-amt price'>${item.amount}</p>
                   <div className='budget-actions'>
                     <button
                       className='edit'

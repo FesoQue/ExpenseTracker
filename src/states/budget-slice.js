@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const getBudgetList = () => {
+  const list = localStorage.getItem('budgetList');
+  return list ? list : [];
+};
+
 const initialState = {
   currentCategory: '',
   budget: '',
@@ -20,8 +25,9 @@ export const budgetSlice = createSlice({
       return { ...state, budget: action.payload };
     },
     setList: (state, action) => {
-      //   return { ...state, list: action.payload };
-      state.list = action.payload;
+      // return { ...state, list: [...state.list, action.payload] };
+      // state.list = action.payload;
+      return { ...state, list: action.payload };
     },
     removeBudget: (state, action) => {
       const budgetId = action.payload;
@@ -49,6 +55,9 @@ export const budgetSlice = createSlice({
     setEditId: (state, action) => {
       return { ...state, editID: action.payload };
     },
+    clearList: (state) => {
+      return { ...state, list: [] };
+    },
   },
 });
 
@@ -61,4 +70,5 @@ export const {
   handleEditItem,
   setIsEditing,
   setEditId,
+  clearList,
 } = budgetSlice.actions;

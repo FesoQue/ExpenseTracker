@@ -53,6 +53,9 @@ export const expensesSlice = createSlice({
     setExpenseEditId: (state, action) => {
       return { ...state, expenseEditID: action.payload };
     },
+    clearExpensesList: (state) => {
+      return { ...state, expenseList: [] };
+    },
   },
 });
 
@@ -65,4 +68,5 @@ export const {
   handleEditExpenseItem,
   setIsEditingExpense,
   setExpenseEditId,
+  clearExpensesList,
 } = expensesSlice.actions;

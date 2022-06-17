@@ -97,6 +97,7 @@ label {
   width: 8rem;
   display: flex;
   align-items: center;
+  font-size: 0.8rem;
   padding: 0.5rem;
   background-color: var(--color3);
   box-shadow: var(--bs);
@@ -111,7 +112,6 @@ label {
 input {
   width: 100%;
   background: none;
-  font-size: 0.8rem;
   color: var(--gray4);
   text-align: center;
   border: 0;
@@ -126,6 +126,7 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 input::placeholder {
+  font-size: 0.7rem;
   color: var(--gray3);
 }
 .add-budget-btn {
@@ -173,11 +174,24 @@ input::placeholder {
 .budget-list-wrapper {
   margin-bottom: 5.5rem;
 }
-
+.budget-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+.budget-list-header button {
+  min-width: 5rem;
+  padding: 0.4rem 0;
+  font-size: 0.7rem;
+  color: var(--white);
+  background: linear-gradient(to bottom right, var(--color), #7788f4);
+  border-radius: var(--br);
+  box-shadow: var(--bs);
+}
 .budget-list-wrapper h4 {
   font-size: 1rem;
   color: var(--gray4);
-  margin-bottom: 1rem;
 }
 
 .budget {
@@ -264,7 +278,7 @@ button {
     padding: 2rem;
   }
   .categories-list {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 1rem;
   }
   .categories-heading h2 {

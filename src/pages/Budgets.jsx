@@ -25,6 +25,7 @@ import {
   handleEditItem,
   setIsEditing,
   setEditId,
+  clearList,
 } from '../states/budget-slice';
 import { Food, Academics } from '../components/icons/Icons';
 
@@ -39,13 +40,15 @@ const Budgets = () => {
 
   // remove duplicate budgets from budget list
   var resArr = [];
-  list.filter((item) => {
-    var i = resArr.findIndex((x) => x.name === item.name);
-    if (i <= -1) {
-      resArr.push(item);
-    }
-    return null;
-  });
+  if (list) {
+    list.filter((item) => {
+      var i = resArr.findIndex((x) => x.name === item.name);
+      if (i <= -1) {
+        resArr.push(item);
+      }
+      return null;
+    });
+  }
 
   const handleCreateBudget = () => {
     if (isEditing) {
@@ -111,7 +114,11 @@ const Budgets = () => {
 
   useEffect(() => {
     dispatch(handleTotal());
+
+    localStorage.setItem('budgetList', list);
   }, [list]);
+
+  // console.log(list);
 
   return (
     <div className='budget-section'>
@@ -189,7 +196,12 @@ const Budgets = () => {
           </div>
         </div>
         <div className='budget-list-wrapper'>
-          <h4>({resArr.length}) Budgets</h4>
+          <div className='budget-list-header'>
+            <h4>({resArr.length}) Budgets</h4>
+            {resArr.length > 0 && (
+              <button onClick={() => dispatch(clearList())}>Clear All</button>
+            )}
+          </div>
           <div className='budget-list'>
             {resArr.map((item) => {
               return (

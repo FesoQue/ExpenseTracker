@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Budgets from './pages/Budgets';
 import History from './pages/History';
@@ -6,6 +6,7 @@ import Expenses from './pages/Expenses';
 import './App.css';
 import Navigation from './components/Navigation';
 import DesktopNav from './components/DesktopNav';
+import { useEffect } from 'react';
 
 function App() {
   return (
