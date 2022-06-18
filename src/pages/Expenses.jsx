@@ -47,7 +47,7 @@ const Expenses = () => {
 
   const { list } = useSelector((state) => state.budgetSlice);
 
-  // remove duplicate budgets from expense list
+  // remove duplicate expense from expenses list
   var resArr = [];
   expenseList.filter((item) => {
     var i = resArr.findIndex((x) => x.name === item.name);
@@ -57,6 +57,14 @@ const Expenses = () => {
     return null;
   });
 
+ 
+// SET THE EXPENSES CATEGORY
+  const handleSetCategory = (category) => {
+    dispatch(setExpenseCategory(category));
+    console.log(expenseCategory);
+  };
+
+// CREATE EXPENSES
   const handleCreateExpenses = () => {
     if (isEditingExpense) {
       const updatedList = expenseList.map((item) => {
@@ -86,6 +94,7 @@ const Expenses = () => {
     }
   };
 
+// CANCEL EXPENSES
   const handleCancelExpenses = () => {
     dispatch(setExpenseCategory(''));
     dispatch(setExpense(''));
@@ -123,10 +132,6 @@ const Expenses = () => {
     return item.name === expenseCategory;
   });
 
-  const handleSetCategory = (category) => {
-    dispatch(setExpenseCategory(category));
-    console.log(expenseCategory);
-  };
 
   useEffect(() => {
     dispatch(handleExpenseTotal());
