@@ -19,13 +19,25 @@
 }
 
 .acct-overview-row2 {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2rem 1.5rem;
-  background-color: var(--color);
   background: linear-gradient(to bottom right, var(--color), #7788f4);
   border-radius: var(--br);
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  background-size: 100%;
+  overflow: hidden;
+}
+.acct-overview-row2::after {
+  content: url('../asset/bg-pattern.svg');
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .divider {
@@ -130,14 +142,14 @@
   width: 1rem;
 }
 .create-budget-card p {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   margin-bottom: 1.5rem;
   text-align: center;
   color: var(--gray4);
 }
 .create-budget-card button {
   min-width: 8rem;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   padding: 0.6rem 0;
   background-color: var(--color);
   color: var(--white);
@@ -246,6 +258,10 @@
     flex-direction: column;
     justify-content: center;
     padding: 2rem;
+    background-image: url('../asset/bg-pattern.svg');
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    background-size: 100%;
     border-radius: var(--br);
     box-shadow: var(--bs);
   }

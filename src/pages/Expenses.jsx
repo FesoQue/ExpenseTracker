@@ -29,6 +29,8 @@ import {
   clearExpensesList,
 } from '../states/expense-slice';
 import { useSelector, useDispatch } from 'react-redux';
+import { motion } from 'framer-motion';
+import { animatePages, transition } from '../animation/animate';
 
 let disabled = false;
 
@@ -42,6 +44,8 @@ const Expenses = () => {
     expenseEditID,
     isEditingExpense,
   } = useSelector((state) => state.expenseSlice);
+
+  const { list } = useSelector((state) => state.budgetSlice);
 
   // remove duplicate budgets from expense list
   var resArr = [];
@@ -115,13 +119,33 @@ const Expenses = () => {
     );
   };
 
+  const foo = () => {
+    // const aaa = list.some((item) => {
+    //   return item.name === expenseCategory;
+    // });
+    // console.log(aaa);
+  };
+
   useEffect(() => {
     dispatch(handleExpenseTotal());
   }, [expenseList]);
-  // console.log(list);
+
+  useEffect(() => {
+    const aaa = list.some((item) => {
+      return item.name === expenseCategory;
+    });
+    console.log(aaa);
+  }, [list, expenseCategory]);
 
   return (
-    <div className='expense-section'>
+    <motion.div
+      initial='out'
+      animate='in'
+      exit='out'
+      variants={animatePages}
+      transition={transition}
+      className='expense-section'
+    >
       <div className='container'>
         <div className='heading'>
           <h1>Create Your Expenses</h1>
@@ -138,6 +162,7 @@ const Expenses = () => {
                   className='category-item expenses-item active-category'
                   onClick={() => {
                     dispatch(setExpenseCategory(category.category));
+                    foo();
                   }}
                   style={{
                     border:
@@ -237,7 +262,7 @@ const Expenses = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

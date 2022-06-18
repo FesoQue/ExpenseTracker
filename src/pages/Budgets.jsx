@@ -28,6 +28,8 @@ import {
   clearList,
 } from '../states/budget-slice';
 import { Food, Academics } from '../components/icons/Icons';
+import { motion } from 'framer-motion';
+import { animatePages, transition } from '../animation/animate';
 
 let disabled = false;
 
@@ -118,10 +120,15 @@ const Budgets = () => {
     localStorage.setItem('budgetList', list);
   }, [list]);
 
-  // console.log(list);
-
   return (
-    <div className='budget-section'>
+    <motion.div
+      initial='out'
+      animate='in'
+      exit='out'
+      variants={animatePages}
+      transition={transition}
+      className='budget-section'
+    >
       <div className='container'>
         <div className='heading'>
           <h1>Create Your Budget</h1>
@@ -233,7 +240,7 @@ const Budgets = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

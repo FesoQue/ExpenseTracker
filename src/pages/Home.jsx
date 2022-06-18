@@ -1,9 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import PieChart from '../components/Charts/PieChart';
 import './Home.css';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Currency, Card, New } from '../components/icons/Icons';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { animatePages, transition } from '../animation/animate';
 
 const Home = () => {
   const progressBar = useRef(null);
@@ -45,7 +47,14 @@ const Home = () => {
   }, [progressPercent]);
 
   return (
-    <div className='container'>
+    <motion.div
+      initial='out'
+      animate='in'
+      exit='out'
+      variants={animatePages}
+      transition={transition}
+      className='container'
+    >
       <div className='overview'>
         <div className='acct-overview'>
           <div className='acct-overview-row1'>
@@ -148,7 +157,7 @@ const Home = () => {
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
