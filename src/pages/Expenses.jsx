@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { categories } from '../category';
 import {
   Academics,
@@ -119,23 +119,19 @@ const Expenses = () => {
     );
   };
 
-  const foo = () => {
-    // const aaa = list.some((item) => {
-    //   return item.name === expenseCategory;
-    // });
-    // console.log(aaa);
+  const checkIsBudget = list.some((item) => {
+    return item.name === expenseCategory;
+  });
+
+  const handleSetCategory = (category) => {
+    dispatch(setExpenseCategory(category));
+    console.log(expenseCategory);
   };
 
   useEffect(() => {
     dispatch(handleExpenseTotal());
-  }, [expenseList]);
-
-  useEffect(() => {
-    const aaa = list.some((item) => {
-      return item.name === expenseCategory;
-    });
-    console.log(aaa);
-  }, [list, expenseCategory]);
+    console.log(expenseCategory);
+  }, [expenseList, expenseCategory]);
 
   return (
     <motion.div
@@ -161,8 +157,7 @@ const Expenses = () => {
                   key={category.id}
                   className='category-item expenses-item active-category'
                   onClick={() => {
-                    dispatch(setExpenseCategory(category.category));
-                    foo();
+                    handleSetCategory(category.category);
                   }}
                   style={{
                     border:
