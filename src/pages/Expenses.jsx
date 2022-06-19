@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { categories } from '../category';
 import {
   Academics,
@@ -31,11 +31,14 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
 import { animatePages, transition } from '../animation/animate';
+import Toast, { Toaster } from 'react-hot-toast';
 
 let disabled = false;
 
 const Expenses = () => {
   const dispatch = useDispatch();
+
+  const alertRef = useRef(null);
 
   const {
     expenseCategory,
@@ -55,6 +58,10 @@ const Expenses = () => {
       resArr.push(item);
     }
     return null;
+  });
+
+  const checkIsBudget = list.some((item) => {
+    return item.name === expenseCategory;
   });
 
   const handleCreateExpenses = () => {
@@ -95,10 +102,15 @@ const Expenses = () => {
     (!expenseCategory && !expense) ||
     (expenseCategory && !expense) ||
     (!expenseCategory && expense) ||
-    (expenseCategory && Number(expense) <= 0)
+    (expenseCategory && Number(expense) <= 0) ||
+    (expenseCategory && !checkIsBudget)
   ) {
     disabled = true;
   } else {
+    disabled = false;
+  }
+
+  if (expenseCategory && checkIsBudget && expense) {
     disabled = false;
   }
 
@@ -119,19 +131,24 @@ const Expenses = () => {
     );
   };
 
-  const checkIsBudget = list.some((item) => {
-    return item.name === expenseCategory;
-  });
-
-  const handleSetCategory = (category) => {
-    dispatch(setExpenseCategory(category));
-    console.log(expenseCategory);
-  };
+  if (expenseCategory && !checkIsBudget) {
+    if (alertRef.current) {
+      alertRef.current.style.display = 'flex';
+      setTimeout(() => {
+        alertRef.current.style.display = 'none';
+      }, 3000);
+    }
+  }
 
   useEffect(() => {
     dispatch(handleExpenseTotal());
-    console.log(expenseCategory);
-  }, [expenseList, expenseCategory]);
+    alertRef.current.style.display = 'none';
+  }, [expenseCategory]);
+
+  useEffect(() => {
+    dispatch(setExpenseCategory(''));
+    dispatch(setExpense(''));
+  }, []);
 
   return (
     <motion.div
@@ -157,7 +174,7 @@ const Expenses = () => {
                   key={category.id}
                   className='category-item expenses-item active-category'
                   onClick={() => {
-                    handleSetCategory(category.category);
+                    dispatch(setExpenseCategory(category.category));
                   }}
                   style={{
                     border:
@@ -255,6 +272,15 @@ const Expenses = () => {
               );
             })}
           </div>
+        </div>
+
+        <div ref={alertRef} className='alert'>
+          <div>
+            <Close />
+          </div>
+          <p>
+            Create a budget for your <span>{expenseCategory}</span> first!
+          </p>
         </div>
       </div>
     </motion.div>
