@@ -11,7 +11,7 @@ const History = () => {
       variants={animatePages}
       transition={transition}
     >
-      History
+      <div className='container'>History</div>
     </motion.div>
   );
 };

@@ -2,10 +2,7 @@ import React from 'react';
 import '../App.css';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { Home } from './icons/Icons';
-import { Budget } from './icons/Icons';
-import { History } from './icons/Icons';
-import { New } from './icons/Icons';
+import { Home, Budget, Currency, History } from './icons/Icons';
 
 const DesktopNav = () => {
   const { totalAmount } = useSelector((state) => state.budgetSlice);
@@ -27,8 +24,8 @@ const DesktopNav = () => {
             <Budget />
             <span>Budgets</span>
           </NavLink>
-          <NavLink to={'/new-expenses'}>
-            <New />
+          <NavLink to={'/expenses'}>
+            <Currency />
             <span>Expenses</span>
           </NavLink>
           <NavLink to={'/history'}>

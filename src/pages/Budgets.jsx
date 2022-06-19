@@ -120,6 +120,12 @@ const Budgets = () => {
     localStorage.setItem('budgetList', list);
   }, [list]);
 
+  useEffect(() => {
+    dispatch(setActiveCategory(''));
+    dispatch(setBudget(''));
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <motion.div
       initial='out'
@@ -131,7 +137,7 @@ const Budgets = () => {
     >
       <div className='container'>
         <div className='heading'>
-          <h1>Create Your Budget</h1>
+          <h1>Create Your Budgets</h1>
         </div>
         <div className='categories'>
           <div className='categories-heading'>

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import PieChart from '../components/Charts/PieChart';
+import DoughnutChart from '../components/Charts/DoughnutChart';
 import './Home.css';
 import { useSelector } from 'react-redux';
 import { Currency, Card, New } from '../components/icons/Icons';
@@ -45,6 +45,10 @@ const Home = () => {
   useEffect(() => {
     progressBar.current.style.width = `${progressPercent}%`;
   }, [progressPercent]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <motion.div
@@ -114,8 +118,7 @@ const Home = () => {
               </span>
             </div>
             <p>
-              Your chart/activity appears here when you create your personal
-              budget{' '}
+              Your budget activities appears here when you create your budget.{' '}
             </p>
             <button onClick={() => navigate('/budgets')}>
               Start budgeting
@@ -124,7 +127,7 @@ const Home = () => {
         ) : (
           <div className='d-flex'>
             <div className='chart-wrapper'>
-              <PieChart />
+              <DoughnutChart />
             </div>
             <div className='budget-summary'>
               {list.map((item, index) => {

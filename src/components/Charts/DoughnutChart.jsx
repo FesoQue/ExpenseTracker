@@ -1,18 +1,18 @@
 import React from 'react';
 import { Chart } from 'chart.js/auto';
-import { Pie } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
 
-const PieChart = () => {
+const DoughnutChart = () => {
   let expenseLabels = [];
   let expenseAmt = [];
 
-  const { expenseList } = useSelector((state) => state.budgetSlice);
+  const { list } = useSelector((state) => state.budgetSlice);
 
-  expenseList.map((expense) => {
+  list.map((expense) => {
     return expenseLabels.push(expense.name);
   });
-  expenseList.map((expense) => {
+  list.map((expense) => {
     return expenseAmt.push(expense.amount);
   });
 
@@ -39,7 +39,7 @@ const PieChart = () => {
     ],
   };
 
-  return <Pie data={data} />;
+  return <Doughnut data={data} />;
 };
 
-export default PieChart;
+export default DoughnutChart;

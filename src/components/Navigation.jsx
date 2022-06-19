@@ -1,9 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home } from './icons/Icons';
-import { Budget } from './icons/Icons';
-import { History } from './icons/Icons';
-import { New } from './icons/Icons';
+import { Home, Budget, Currency, History } from './icons/Icons';
 
 const Navigation = () => {
   return (
@@ -14,8 +11,8 @@ const Navigation = () => {
       <NavLink to={'/budgets'}>
         <Budget />
       </NavLink>
-      <NavLink to={'/new-expenses'}>
-        <New />
+      <NavLink to={'/expenses'}>
+        <Currency />
       </NavLink>
       <NavLink to={'/history'}>
         <History />

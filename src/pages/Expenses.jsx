@@ -148,6 +148,7 @@ const Expenses = () => {
   useEffect(() => {
     dispatch(setExpenseCategory(''));
     dispatch(setExpense(''));
+    window.scrollTo(0, 0);
   }, []);
 
   return (
@@ -236,7 +237,7 @@ const Expenses = () => {
         </div>
         <div className='expense-list-wrapper budget-list-wrapper'>
           <div className='budget-list-header'>
-            <h4>({resArr.length}) Budgets</h4>
+            <h4>({resArr.length}) Expenses</h4>
             {resArr.length > 0 && (
               <button onClick={() => dispatch(clearExpensesList())}>
                 Clear All
