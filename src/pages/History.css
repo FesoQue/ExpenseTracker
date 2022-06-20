@@ -1,0 +1,41 @@
+.history-wrapper {
+  padding: 2rem 0 5.5rem;
+}
+.history {
+  padding: 1rem;
+  background: var(--white);
+  border-radius: var(--br);
+  box-shadow: var(--bs);
+}
+.budget-history {
+  margin-bottom: 1rem;
+}
+.history-header {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--gray1);
+}
+.history-header div {
+  display: flex;
+  justify-content: center;
+}
+.history-header svg {
+  width: 1.1rem;
+  fill: var(--gray4);
+  margin-right: 0.8rem;
+}
+.history-header p {
+  font-size: 0.75rem;
+  color: var(--gray4);
+}
+.history-content {
+  height: 20rem;
+}
+.d-center {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.expenses-content button {
+  background-color: #7788f4;
+}

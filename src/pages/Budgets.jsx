@@ -39,8 +39,11 @@ const Budgets = () => {
   const { currentCategory, budget, list, isEditing, editID } = useSelector(
     (state) => state.budgetSlice
   );
+  const { expenseList } = useSelector((state) => state.expenseSlice);
+  // console.log(expenseList);
 
   // remove duplicate budgets from budget list
+
   var resArr = [];
   if (list) {
     list.filter((item) => {
@@ -113,6 +116,10 @@ const Budgets = () => {
   } else {
     disabled = false;
   }
+
+  // const deleteExpenses = (name) => {
+  //   return resArr.filter((expense) => expense.name !== name);
+  // };
 
   useEffect(() => {
     dispatch(handleTotal());
@@ -235,7 +242,9 @@ const Budgets = () => {
                     </button>
                     <button
                       className='thrash'
-                      onClick={() => dispatch(removeBudget(item.id))}
+                      onClick={() => {
+                        dispatch(removeBudget(item.id));
+                      }}
                     >
                       <Delete />
                     </button>

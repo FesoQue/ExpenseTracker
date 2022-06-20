@@ -136,7 +136,8 @@ const Expenses = () => {
       alertRef.current.style.display = 'flex';
       setTimeout(() => {
         alertRef.current.style.display = 'none';
-      }, 3000);
+        dispatch(setExpenseCategory(''));
+      }, 4000);
     }
   }
 
