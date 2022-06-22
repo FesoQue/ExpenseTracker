@@ -20,7 +20,7 @@ const DoughnutChart = () => {
     labels: [...new Set(expenseLabels)],
     datasets: [
       {
-        label: 'My First Dataset',
+        label: 'Budgets',
         data: [...new Set(expenseAmt)],
         backgroundColor: [
           'rgb(255, 99, 132)',

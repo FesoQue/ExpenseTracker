@@ -117,10 +117,6 @@ const Budgets = () => {
     disabled = false;
   }
 
-  // const deleteExpenses = (name) => {
-  //   return resArr.filter((expense) => expense.name !== name);
-  // };
-
   useEffect(() => {
     dispatch(handleTotal());
 

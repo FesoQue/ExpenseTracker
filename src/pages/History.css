@@ -29,13 +29,40 @@
   color: var(--gray4);
 }
 .history-content {
-  height: 20rem;
+  min-height: 50vh;
+  /* outline: 1px solid red; */
+  /* display: ; */
+  /* height: 20rem; */
 }
 .d-center {
-  height: 100%;
+  height: 50vh;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .expenses-content button {
   background-color: #7788f4;
+}
+.pie-chart-wrapper canvas {
+  height: 9rem !important;
+}
+@media screen and (min-width: 1000px) {
+  .history-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .history {
+    width: 100%;
+  }
+  .budget-history {
+    margin-bottom: 0;
+  }
+  .history-chart.chart-wrapper {
+    width: 60%;
+    margin: 0 auto;
+  }
+  .pie-chart-wrapper canvas {
+    height: auto !important;
+  }
 }

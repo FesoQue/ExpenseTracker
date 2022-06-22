@@ -5,11 +5,14 @@ import { New, Stat } from '../components/icons/Icons';
 import './History.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import DoughnutChart from '../components/Charts/DoughnutChart';
+import PieChart from '../components/Charts/PieChart';
 
 const History = () => {
   const navigate = useNavigate();
   const { list } = useSelector((state) => state.budgetSlice);
   const { expenseList } = useSelector((state) => state.expenseSlice);
+  console.log(expenseList);
 
   return (
     <motion.div
@@ -49,11 +52,15 @@ const History = () => {
                   </div>
                 </div>
               ) : (
-                <div></div>
+                <div className=''>
+                  <div className='history-chart chart-wrapper'>
+                    <DoughnutChart />
+                  </div>
+                </div>
               )}
             </div>
           </div>
-          {/* expenses */}
+          {/* budget */}
           <div className='history expenses-history'>
             <div className='history-header'>
               <div>
@@ -80,7 +87,9 @@ const History = () => {
                   </div>
                 </div>
               ) : (
-                <div></div>
+                <div className='pie-chart-wrapper'>
+                  <PieChart />{' '}
+                </div>
               )}
             </div>
           </div>

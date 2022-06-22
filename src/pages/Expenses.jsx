@@ -144,7 +144,7 @@ const Expenses = () => {
   useEffect(() => {
     dispatch(handleExpenseTotal());
     alertRef.current.style.display = 'none';
-  }, [expenseCategory]);
+  }, [expenseCategory, expenseList]);
 
   useEffect(() => {
     dispatch(setExpenseCategory(''));

@@ -258,12 +258,17 @@
     flex-direction: column;
     justify-content: center;
     padding: 2rem;
-    background-image: url('../asset/bg-pattern.svg');
     background-repeat: no-repeat;
     background-position: 100% 100%;
     background-size: 100%;
     border-radius: var(--br);
     box-shadow: var(--bs);
+  }
+  .col-card2 {
+    background-image: url('../asset/bg-pattern.svg');
+  }
+  .col-card1 {
+    background-image: url('../asset/bg-pattern3.svg');
   }
   .acct-overview-row2-col div {
     width: 2.6rem;

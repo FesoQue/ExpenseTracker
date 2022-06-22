@@ -2,12 +2,13 @@ import React from 'react';
 import { Chart } from 'chart.js/auto';
 import { Pie } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
+import { Bar } from 'react-chartjs-2';
 
 const PieChart = () => {
   let expenseLabels = [];
   let expenseAmt = [];
 
-  const { expenseList } = useSelector((state) => state.budgetSlice);
+  const { expenseList } = useSelector((state) => state.expenseSlice);
 
   expenseList.map((expense) => {
     return expenseLabels.push(expense.name);
@@ -20,7 +21,7 @@ const PieChart = () => {
     labels: [...new Set(expenseLabels)],
     datasets: [
       {
-        label: 'My First Dataset',
+        label: 'Expenses',
         data: [...new Set(expenseAmt)],
         backgroundColor: [
           'rgb(255, 99, 132)',
@@ -39,7 +40,8 @@ const PieChart = () => {
     ],
   };
 
-  return <Pie data={data} />;
+  return <Bar data={data} />;
+  // return <Pie data={data} />;
 };
 
 export default PieChart;
