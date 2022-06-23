@@ -189,7 +189,7 @@
 }
 .budget-summary {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
   justify-content: space-between;
   gap: 0.8rem;
 }
@@ -223,6 +223,12 @@
 }
 .budget-summary-col2 p:nth-child(1) {
   color: var(--gray3);
+}
+@media screen and (min-width: 700px) {
+  .chart-wrapper {
+    width: 50%;
+    margin: 0 auto 2rem;
+  }
 }
 @media screen and (min-width: 1000px) {
   .acct-overview-row1 {
@@ -263,12 +269,7 @@
     background-size: 100%;
     border-radius: var(--br);
     box-shadow: var(--bs);
-  }
-  .col-card2 {
     background-image: url('../asset/bg-pattern.svg');
-  }
-  .col-card1 {
-    background-image: url('../asset/bg-pattern3.svg');
   }
   .acct-overview-row2-col div {
     width: 2.6rem;

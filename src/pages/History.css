@@ -1,5 +1,5 @@
 .history-wrapper {
-  padding: 2rem 0 5.5rem;
+  padding: 1.5rem 0 5.5rem;
 }
 .history {
   padding: 1rem;
@@ -30,9 +30,6 @@
 }
 .history-content {
   min-height: 50vh;
-  /* outline: 1px solid red; */
-  /* display: ; */
-  /* height: 20rem; */
 }
 .d-center {
   height: 50vh;
@@ -45,6 +42,57 @@
 }
 .pie-chart-wrapper canvas {
   height: 9rem !important;
+}
+.history-budget-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+.history-budget-list-item {
+  padding: 0.5rem;
+  border-radius: var(--br);
+  transition: var(--transition);
+  background-color: var(--gray0);
+}
+.history-expense-list-item span {
+  background-color: #7788f4;
+}
+.history-budget-list-item:hover {
+  background-color: var(--gray0);
+}
+.hbl-col1,
+.history-budget-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.history-budget-list-item p {
+  font-size: 0.65rem;
+}
+.hbl-col1 svg {
+  width: 1.2rem;
+  fill: var(--color);
+}
+.history-expense-list-item svg {
+  fill: #7788f4;
+}
+.hbl-col1 span {
+  width: 1.8rem;
+  height: 1.8rem;
+  display: grid;
+  place-items: center;
+  margin-right: 1rem;
+  border-radius: 50%;
+  background-color: var(--color2);
+}
+.history-expense-list-item span {
+  background-color: #7788f4;
+  background-color: #7788f44d;
+}
+.hbl-col2 p:nth-child(2),
+.hbl-col1 p:nth-child(2) {
+  color: var(--gray4);
 }
 @media screen and (min-width: 1000px) {
   .history-wrapper {
@@ -64,5 +112,8 @@
   }
   .pie-chart-wrapper canvas {
     height: auto !important;
+  }
+  .history-budget-list-item {
+    margin-bottom: 0;
   }
 }

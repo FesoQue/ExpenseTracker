@@ -1,18 +1,90 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { animatePages, transition } from '../animation/animate';
-import { New, Stat } from '../components/icons/Icons';
+import {
+  Academics,
+  Cloth,
+  Electric,
+  Food,
+  Health,
+  Internet,
+  New,
+  Rent,
+  Shopping,
+  Stat,
+  Transport,
+  Travel,
+} from '../components/icons/Icons';
 import './History.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import DoughnutChart from '../components/Charts/DoughnutChart';
-import PieChart from '../components/Charts/PieChart';
+import BarChart from '../components/Charts/BarChart';
+import Moment from 'react-moment';
 
 const History = () => {
   const navigate = useNavigate();
   const { list } = useSelector((state) => state.budgetSlice);
   const { expenseList } = useSelector((state) => state.expenseSlice);
-  console.log(expenseList);
+
+  // remove duplicate budgets from budget list
+  let budgetList = [];
+  if (list) {
+    list.filter((item) => {
+      var i = budgetList.findIndex((x) => x.name === item.name);
+      if (i <= -1) {
+        budgetList.push(item);
+      }
+      return null;
+    });
+  }
+  let expensesList = [];
+  if (expenseList) {
+    expenseList.filter((item) => {
+      var i = expensesList.findIndex((x) => x.name === item.name);
+      if (i <= -1) {
+        expensesList.push(item);
+      }
+      return null;
+    });
+  }
+
+  const Duration = ({ time }) => {
+    return <Moment date={new Date(time)} format='DD MMM hh:mm' />;
+  };
+
+  const CategoryIcon = ({ name }) => {
+    return (
+      <>
+        {name === 'Food' && <Food />}
+        {name === 'Education' && <Academics />}
+        {name === 'Cloth' && <Cloth />}
+        {name === 'Travel' && <Travel />}
+        {name === 'Health' && <Health />}
+        {name === 'Transport' && <Transport />}
+        {name === 'Internet' && <Internet />}
+        {name === 'Shopping' && <Shopping />}
+        {name === 'Rent' && <Rent />}
+        {name === 'Electricity' && <Electric />}
+      </>
+    );
+  };
+  const backgroundColor = [
+    'rgb(255, 99, 132)',
+    'rgb(54, 162, 235)',
+    'rgb(255, 105, 56)',
+    'rgb(255, 35, 190)',
+    'rgb(50, 15, 90)',
+    'rgb(105, 15, 220)',
+    'rgb(105, 105, 20)',
+    'rgb(100, 15, 90)',
+    'rgb(55, 125, 90)',
+    'rgb(255, 205, 86)',
+  ];
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <motion.div
@@ -43,7 +115,7 @@ const History = () => {
                       </span>
                     </div>
                     <p>
-                      Your budget history appears here when you create your
+                      Your budget stats appears here when you create your
                       budget.{' '}
                     </p>
                     <button onClick={() => navigate('/budgets')}>
@@ -55,6 +127,35 @@ const History = () => {
                 <div className=''>
                   <div className='history-chart chart-wrapper'>
                     <DoughnutChart />
+                  </div>
+                  <div className='history-budget-list'>
+                    {budgetList.map((list, index) => {
+                      return (
+                        <div className='history-budget-list-item' key={list.id}>
+                          <div className='hbl-col1'>
+                            <span>
+                              <CategoryIcon name={list.name} />
+                            </span>
+                            <div className=''>
+                              <p>{list.name}</p>
+                              <p>
+                                <Duration time={Number(list.id)} />
+                              </p>
+                            </div>
+                          </div>
+                          <div className='hbl-col2'>
+                            <p
+                              style={{
+                                color: backgroundColor[index],
+                              }}
+                            >
+                              {list.amount}
+                            </p>
+                            <p>USD</p>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -78,8 +179,7 @@ const History = () => {
                       </span>
                     </div>
                     <p>
-                      Your expenses history appears here when you start
-                      spending.
+                      Your expenses stats appears here when you start spending.
                     </p>
                     <button onClick={() => navigate('/expenses')}>
                       Start Spending
@@ -87,9 +187,43 @@ const History = () => {
                   </div>
                 </div>
               ) : (
-                <div className='pie-chart-wrapper'>
-                  <PieChart />{' '}
-                </div>
+                <>
+                  <div className='pie-chart-wrapper'>
+                    <BarChart />{' '}
+                  </div>
+                  <div className='history-budget-list'>
+                    {expensesList.map((list, index) => {
+                      return (
+                        <div
+                          className='history-expense-list-item history-budget-list-item'
+                          key={list.id}
+                        >
+                          <div className='hbl-col1'>
+                            <span>
+                              <CategoryIcon name={list.name} />
+                            </span>
+                            <div className=''>
+                              <p>{list.name}</p>
+                              <p>
+                                <Duration time={Number(list.id)} />
+                              </p>
+                            </div>
+                          </div>
+                          <div className='hbl-col2'>
+                            <p
+                              style={{
+                                color: backgroundColor[index],
+                              }}
+                            >
+                              -{list.amount}
+                            </p>
+                            <p>USD</p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </>
               )}
             </div>
           </div>

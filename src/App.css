@@ -100,6 +100,56 @@ button {
 aside {
   display: none;
 }
+header {
+  /* position: absolute; */
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0 0;
+}
+.logo {
+  width: 2.8rem;
+  height: 2.8rem;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(to bottom right, var(--color2), #7788f44d);
+  border-radius: var(--br);
+  box-shadow: var(--bs);
+}
+.logo h2 {
+  --bg-size: 400%;
+  --color-one: var(--color);
+  --color-two: #7788f4;
+  font-size: 30px;
+  background: linear-gradient(
+      90deg,
+      var(--color-one),
+      var(--color-two),
+      var(--color-one)
+    )
+    0 0 / var(--bg-size) 100%;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: move-bg 4s infinite linear reverse;
+}
+@keyframes move-bg {
+  to {
+    background-position: var(--bg-size) 0;
+  }
+}
+.logo span {
+  width: 2.3rem;
+  height: 2.3rem;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(to bottom right, var(--color), #7788f4);
+  border-radius: 50%;
+  box-shadow: var(--bs);
+}
+.logo svg {
+  width: 1.4rem;
+  fill: var(--gray8);
+}
 @media screen and (min-width: 1000px) {
   .mobile-nav {
     display: none;
@@ -110,6 +160,9 @@ aside {
   }
   .flex-col {
     width: 80%;
+  }
+  header {
+    display: none;
   }
   aside {
     position: relative;

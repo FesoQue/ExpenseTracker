@@ -40,11 +40,9 @@ const Budgets = () => {
     (state) => state.budgetSlice
   );
   const { expenseList } = useSelector((state) => state.expenseSlice);
-  // console.log(expenseList);
 
   // remove duplicate budgets from budget list
-
-  var resArr = [];
+  let resArr = [];
   if (list) {
     list.filter((item) => {
       var i = resArr.findIndex((x) => x.name === item.name);
@@ -119,8 +117,7 @@ const Budgets = () => {
 
   useEffect(() => {
     dispatch(handleTotal());
-
-    localStorage.setItem('budgetList', list);
+    localStorage.setItem('budgetList', resArr);
   }, [list]);
 
   useEffect(() => {

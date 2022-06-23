@@ -4,6 +4,7 @@ const getBudgetList = () => {
   const list = localStorage.getItem('budgetList');
   return list ? list : [];
 };
+console.log(getBudgetList());
 
 const initialState = {
   currentCategory: '',

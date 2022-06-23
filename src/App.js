@@ -7,12 +7,14 @@ import './App.css';
 import Navigation from './components/Navigation';
 import DesktopNav from './components/DesktopNav';
 import { AnimatePresence } from 'framer-motion';
+import Header from './components/Header';
 
 function App() {
   return (
     <AnimatePresence>
       <main>
         <BrowserRouter>
+          <Header />
           <Navigation />
           <DesktopNav />
           <div className='flex-col'>

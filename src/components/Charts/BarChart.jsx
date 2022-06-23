@@ -1,10 +1,9 @@
 import React from 'react';
 import { Chart } from 'chart.js/auto';
-import { Pie } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
 import { Bar } from 'react-chartjs-2';
 
-const PieChart = () => {
+const BarChart = () => {
   let expenseLabels = [];
   let expenseAmt = [];
 
@@ -41,7 +40,6 @@ const PieChart = () => {
   };
 
   return <Bar data={data} />;
-  // return <Pie data={data} />;
 };
 
-export default PieChart;
+export default BarChart;
