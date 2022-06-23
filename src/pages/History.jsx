@@ -102,7 +102,7 @@ const History = () => {
             <div className='history-header'>
               <div>
                 <Stat />
-                <p>Your Budgets History</p>
+                <p>Your Budget History/Stat</p>
               </div>
             </div>
             <div className='budget-content history-content'>
@@ -166,7 +166,7 @@ const History = () => {
             <div className='history-header'>
               <div>
                 <Stat />
-                <p>Your Expenses History</p>
+                <p>Your Expenses History/Stat</p>
               </div>
             </div>
             <div className='expenses-content history-content'>
