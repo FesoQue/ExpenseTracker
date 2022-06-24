@@ -1,10 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const getExpensesList = () => {
+  let list = localStorage.getItem('expenses');
+  if (list) {
+    return JSON.parse(list);
+  } else {
+    return [];
+  }
+};
+
+const getExpensesAmt = () => {
+  let amount = localStorage.getItem('expensesAmount');
+  if (amount) {
+    return JSON.parse(amount);
+  } else {
+    return 0;
+  }
+};
+
 const initialState = {
   expenseCategory: null,
   expense: '',
-  expenseList: [],
-  totalExpense: 0,
+  expenseList: getExpensesList(),
+  totalExpense: getExpensesAmt(),
   expenseEditID: null,
   isEditingExpense: false,
 };

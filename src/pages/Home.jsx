@@ -14,7 +14,9 @@ const Home = () => {
   let progressPercent = 0;
 
   const { totalAmount, list } = useSelector((state) => state.budgetSlice);
-  const { totalExpense } = useSelector((state) => state.expenseSlice);
+  const { totalExpense, expenseList } = useSelector(
+    (state) => state.expenseSlice
+  );
 
   if (totalExpense > 0 && totalAmount > 0) {
     progressPercent = (totalExpense / totalAmount) * 100;
@@ -41,6 +43,14 @@ const Home = () => {
 
   const balance = (totalAmount - totalExpense).toFixed(2);
   const negativeBalance = -(totalAmount - totalExpense).toFixed(2);
+
+  useEffect(() => {
+    localStorage.setItem('totalAmount', JSON.stringify(totalAmount));
+  }, [list]);
+
+  useEffect(() => {
+    localStorage.setItem('expensesAmount', JSON.stringify(totalExpense));
+  }, [expenseList]);
 
   useEffect(() => {
     progressBar.current.style.width = `${progressPercent}%`;

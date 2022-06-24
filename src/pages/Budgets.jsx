@@ -117,7 +117,7 @@ const Budgets = () => {
 
   useEffect(() => {
     dispatch(handleTotal());
-    localStorage.setItem('budgetList', resArr);
+    localStorage.setItem('budget', JSON.stringify(list));
   }, [list]);
 
   useEffect(() => {
@@ -141,7 +141,7 @@ const Budgets = () => {
         </div>
         <div className='categories'>
           <div className='categories-heading'>
-            <h2>Choose Category</h2>
+            <h2>Choose a Category</h2>
           </div>
           <ul className='categories-list'>
             {categories.map((category) => {

@@ -79,7 +79,7 @@ nav {
   width: 95%;
   margin: 0 auto;
   bottom: 1.2rem;
-  height: 3rem;
+  height: 3.5rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -89,7 +89,7 @@ nav {
   z-index: 99;
 }
 nav svg {
-  width: 1.5rem;
+  width: 1.7rem;
   color: var(--gray2);
 }
 .active svg {

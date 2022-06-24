@@ -312,6 +312,6 @@ button {
     margin-left: -5rem;
   }
   .check {
-    right: 10px;
+    top: -10px;
   }
 }

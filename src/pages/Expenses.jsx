@@ -31,13 +31,11 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
 import { animatePages, transition } from '../animation/animate';
-import Toast, { Toaster } from 'react-hot-toast';
 
 let disabled = false;
 
 const Expenses = () => {
   const dispatch = useDispatch();
-
   const alertRef = useRef(null);
 
   const {
@@ -131,26 +129,29 @@ const Expenses = () => {
     );
   };
 
-  if (expenseCategory && !checkIsBudget) {
-    if (alertRef.current) {
-      alertRef.current.style.display = 'flex';
-      setTimeout(() => {
-        alertRef.current.style.display = 'none';
-        dispatch(setExpenseCategory(''));
-      }, 4000);
-    }
-  }
-
-  useEffect(() => {
-    dispatch(handleExpenseTotal());
-    alertRef.current.style.display = 'none';
-  }, [expenseCategory, expenseList]);
-
   useEffect(() => {
     dispatch(setExpenseCategory(''));
     dispatch(setExpense(''));
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    dispatch(handleExpenseTotal());
+    localStorage.setItem('expenses', JSON.stringify(expenseList));
+  }, [expenseList]);
+
+  useEffect(() => {
+    let timeoutId;
+    alertRef.current.style.display = 'none';
+    if (expenseCategory && !checkIsBudget) {
+      alertRef.current.style.display = 'flex';
+      timeoutId = setTimeout(() => {
+        alertRef.current.style.display = 'none';
+        dispatch(setExpenseCategory(''));
+      }, 3000);
+    }
+    return () => clearTimeout(timeoutId);
+  }, [expenseCategory]);
 
   return (
     <motion.div
@@ -167,7 +168,7 @@ const Expenses = () => {
         </div>
         <div className='categories'>
           <div className='categories-heading'>
-            <h2>Choose Category</h2>
+            <h2>Choose a Category</h2>
           </div>
           <ul className='categories-list'>
             {categories.map((category) => {
