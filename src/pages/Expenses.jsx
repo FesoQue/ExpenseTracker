@@ -190,9 +190,10 @@ const Expenses = () => {
                   </div>
                   <p>{category.category}</p>
                   <span
-                    className='check'
+                    className='expenses-check check'
                     style={{
                       opacity: expenseCategory === category.category ? 1 : 0,
+                      background: '#7788f4',
                     }}
                   >
                     <Check />
