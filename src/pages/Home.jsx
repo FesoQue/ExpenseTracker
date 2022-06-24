@@ -39,8 +39,8 @@ const Home = () => {
     'rgb(255, 205, 86)',
   ];
 
-  const balance = totalAmount - totalExpense;
-  const negativeBalance = -(totalAmount - totalExpense);
+  const balance = (totalAmount - totalExpense).toFixed(2);
+  const negativeBalance = -(totalAmount - totalExpense).toFixed(2);
 
   useEffect(() => {
     progressBar.current.style.width = `${progressPercent}%`;

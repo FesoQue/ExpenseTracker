@@ -15,7 +15,6 @@
 }
 .expenses-item .check svg {
   fill: transparent;
-  color: var(--white);
 }
 .expenses-form-group {
   background-color: #7788f44d;
